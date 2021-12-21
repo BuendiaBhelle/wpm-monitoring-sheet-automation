@@ -1,0 +1,15 @@
+{
+  "name": "wpm",
+  "version": "1.0.0",
+  "description": "automation for monitoring/reporting issues for wpm monitoring sheet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maribel L. Buendia",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "googleapis": "^92.0.0"
+  }
+}
