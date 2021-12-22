@@ -190,45 +190,62 @@ async function listSitesWithIssues() {
 
     const score = ['C', 'D', 'E', 'F'];
 
+    const getDate = await googleSheets.spreadsheets.values.get({
+        auth,
+        spreadsheetId,
+        range: "Summary!D25",
+    });
+
+    const previously_listed_date = new Date(getDate.data.values[0][0]);
+
     for (let i = 0; i < sites.length; i++) {
         for (let j = 0; j < sites[i].length; j++) {
-            const security_score = sites[i][j][5];
-            const url = sites[i][j][2];
-            const first_byte_time = sites[i][j][6];
-            const keep_alive_enabled = sites[i][j][7];
-            const compress_transfer = sites[i][j][8];
-            const compress_images = sites[i][j][9];
-            const cache_static_content = sites[i][j][10];
-            const effective_use_of_cdn = sites[i][j][11];
+            let security_score = sites[i][j][5];
+            let site = sites[i][j][0];
+            let url = sites[i][j][2];
+            let date = sites[i][j][3];
+            let first_byte_time = sites[i][j][6];
+            let keep_alive_enabled = sites[i][j][7];
+            let compress_transfer = sites[i][j][8];
+            let compress_images = sites[i][j][9];
+            let cache_static_content = sites[i][j][10];
+            let effective_use_of_cdn = sites[i][j][11];
 
-            if ((security_score === score[0] || security_score === score[1] || security_score === score[2] || security_score === score[3]) ||
-            (first_byte_time === score[0] || first_byte_time === score[1] || first_byte_time === score[2] || first_byte_time === score[3]) ||
-            (keep_alive_enabled === score[0] || keep_alive_enabled === score[1] || keep_alive_enabled === score[2] || keep_alive_enabled === score[3]) ||
-            (compress_transfer === score[0] || compress_transfer === score[1] || compress_transfer === score[2] || compress_transfer === score[3]) ||
-            (compress_images === score[0] || compress_images === score[1] || compress_images === score[2] || compress_images === score[3]) ||
-            (cache_static_content === score[0] || cache_static_content === score[1] || cache_static_content === score[2] || cache_static_content === score[3]) ||
-            (effective_use_of_cdn === "X")) {
+            const date_in_sheets = new Date(date);
 
-                console.log(url);
-                
-                // Write rows to google sheet
-                try {
-                    await googleSheets.spreadsheets.values.append({
-                        auth,
-                        spreadsheetId,
-                        range: "Summary!A7:Q17",
-                        valueInputOption: "USER_ENTERED",
-                        resource: {
-                            values: [
-                                sites[i][j]
-                            ]
-                        }
-                    });
-                } catch (error) {
-                    console.log(error);
+            if (previously_listed_date.getDate() === date_in_sheets.getDate()) {
+                console.log("Listed.");
+            }
+            else {
+                if ((security_score === score[0] || security_score === score[1] || security_score === score[2] || security_score === score[3]) ||
+                (first_byte_time === score[0] || first_byte_time === score[1] || first_byte_time === score[2] || first_byte_time === score[3]) ||
+                (keep_alive_enabled === score[0] || keep_alive_enabled === score[1] || keep_alive_enabled === score[2] || keep_alive_enabled === score[3]) ||
+                (compress_transfer === score[0] || compress_transfer === score[1] || compress_transfer === score[2] || compress_transfer === score[3]) ||
+                (compress_images === score[0] || compress_images === score[1] || compress_images === score[2] || compress_images === score[3]) ||
+                (cache_static_content === score[0] || cache_static_content === score[1] || cache_static_content === score[2] || cache_static_content === score[3]) ||
+                (effective_use_of_cdn === "X")) {
+
+                    console.log(site);
+
+                    // Write rows to google sheet
+                    try {
+                        await googleSheets.spreadsheets.values.append({
+                            auth,
+                            spreadsheetId,
+                            range: "Summary!A7:Q17",
+                            valueInputOption: "USER_ENTERED",
+                            resource: {
+                                values: [
+                                    sites[i][j]
+                                ]
+                            }
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
                 }
             }
         } 
-    }
+    }  
 }
 listSitesWithIssues();
