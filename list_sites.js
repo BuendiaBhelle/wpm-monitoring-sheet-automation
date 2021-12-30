@@ -193,7 +193,7 @@ async function listSitesWithIssues() {
     const getDate = await googleSheets.spreadsheets.values.get({
         auth,
         spreadsheetId,
-        range: "Summary!D25",
+        range: "Summary!D26",
     });
 
     const previously_listed_date = new Date(getDate.data.values[0][0]);
