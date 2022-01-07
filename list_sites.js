@@ -85,12 +85,6 @@ async function listSitesWithIssues() {
         range: "FRL!A4:O4",
     });
 
-    const eps = await googleSheets.spreadsheets.values.get({
-        auth,
-        spreadsheetId,
-        range: "EPS!A4:O4",
-    });
-
     const bd = await googleSheets.spreadsheets.values.get({
         auth,
         spreadsheetId,
@@ -128,7 +122,6 @@ async function listSitesWithIssues() {
         i_n.data.values,
         np.data.values,
         frl.data.values,
-        eps.data.values,
         bd.data.values,
         scaz.data.values,
         cfhec.data.values,
@@ -173,20 +166,17 @@ async function listSitesWithIssues() {
     sites[11][0].splice(0, 0, 'FRL');
     sites[11][0].splice(13, 0, '');
 
-    sites[12][0].splice(0, 0, 'EPS');
+    sites[12][0].splice(0, 0, 'BD');
     sites[12][0].splice(13, 0, '');
 
-    sites[13][0].splice(0, 0, 'BD');
+    sites[13][0].splice(0, 0, 'SCAZ');
     sites[13][0].splice(13, 0, '');
 
-    sites[14][0].splice(0, 0, 'SCAZ');
+    sites[14][0].splice(0, 0, 'CFHEC');
     sites[14][0].splice(13, 0, '');
 
-    sites[15][0].splice(0, 0, 'CFHEC');
+    sites[15][0].splice(0, 0, 'APJ');
     sites[15][0].splice(13, 0, '');
-
-    sites[16][0].splice(0, 0, 'APJ');
-    sites[16][0].splice(13, 0, '');
 
     const score = ['C', 'D', 'E', 'F'];
 
