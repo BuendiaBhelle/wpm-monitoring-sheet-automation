@@ -31,7 +31,7 @@ async function displaySitesToBeReported() {
         var security_score = data[i][5];
         var screenshot_link = data[i][12];
 
-        if ((security_score === score[0] || security_score === score[1] || security_score === score[2] || security_score === score[3]) && (site !== "CFHEC" && site !== "EPS" && site !== "GPS")) {
+        if ((security_score === score[0] || security_score === score[1] || security_score === score[2] || security_score === score[3]) && (site !== "CFHEC" && site !== "EPS" && site !== "GPS" && site !== "CDG")) {
             console.log("* " + site + " - " + screenshot_link)
         }
     }
@@ -44,7 +44,7 @@ async function displaySitesToBeReported() {
         var first_byte_time = data[j][6];
         var screenshot_link = data[j][12];
 
-        if ((first_byte_time === score[0] || first_byte_time === score[1] || first_byte_time === score[2] || first_byte_time === score[3]) && (site !== "CFHEC" && site !== "EPS" && site !== "GPS")) {
+        if ((first_byte_time === score[0] || first_byte_time === score[1] || first_byte_time === score[2] || first_byte_time === score[3]) && (site !== "CFHEC" && site !== "EPS" && site !== "GPS" && site !== "CDG")) {
             console.log("* " + site + " - " + screenshot_link)
         }
     }
