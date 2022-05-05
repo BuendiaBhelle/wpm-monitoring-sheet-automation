@@ -13,12 +13,6 @@ async function listSitesWithIssues() {
 
     // Read rows from google sheets
     // ACC - LIG SITES ARE NOT INCLUDED YET SINCE SHEETS FOR THOSE AREN'T UNIFORM.
-    const bcr = await googleSheets.spreadsheets.values.get({
-        auth,
-        spreadsheetId,
-        range: "BCR!A4:O4",
-    });
-
     const gps = await googleSheets.spreadsheets.values.get({
         auth,
         spreadsheetId,
@@ -110,7 +104,6 @@ async function listSitesWithIssues() {
     });
 
     const sites = [
-        bcr.data.values,
         gps.data.values,
         fb.data.values,
         sj.data.values,
@@ -130,53 +123,50 @@ async function listSitesWithIssues() {
 
     console.log(sites.length);
 
-    sites[0][0].splice(0, 0, 'BCR');
+    sites[0][0].splice(0, 0, 'GPS');
     sites[0][0].splice(13, 0, '');
 
-    sites[1][0].splice(0, 0, 'GPS');
+    sites[1][0].splice(0, 0, 'FB');
     sites[1][0].splice(13, 0, '');
 
-    sites[2][0].splice(0, 0, 'FB');
+    sites[2][0].splice(0, 0, 'SJ');
     sites[2][0].splice(13, 0, '');
 
-    sites[3][0].splice(0, 0, 'SJ');
+    sites[3][0].splice(0, 0, 'AL');
     sites[3][0].splice(13, 0, '');
 
-    sites[4][0].splice(0, 0, 'AL');
+    sites[4][0].splice(0, 0, 'AZRS');
     sites[4][0].splice(13, 0, '');
 
-    sites[5][0].splice(0, 0, 'AZRS');
+    sites[5][0].splice(0, 0, 'KFD');
     sites[5][0].splice(13, 0, '');
 
-    sites[6][0].splice(0, 0, 'KFD');
+    sites[6][0].splice(0, 0, 'NHU');
     sites[6][0].splice(13, 0, '');
 
-    sites[7][0].splice(0, 0, 'NHU');
+    sites[7][0].splice(0, 0, 'ISC');
     sites[7][0].splice(13, 0, '');
 
-    sites[8][0].splice(0, 0, 'ISC');
+    sites[8][0].splice(0, 0, 'IN');
     sites[8][0].splice(13, 0, '');
 
-    sites[9][0].splice(0, 0, 'IN');
+    sites[9][0].splice(0, 0, 'NP');
     sites[9][0].splice(13, 0, '');
 
-    sites[10][0].splice(0, 0, 'NP');
+    sites[10][0].splice(0, 0, 'FRL');
     sites[10][0].splice(13, 0, '');
 
-    sites[11][0].splice(0, 0, 'FRL');
+    sites[11][0].splice(0, 0, 'BD');
     sites[11][0].splice(13, 0, '');
 
-    sites[12][0].splice(0, 0, 'BD');
+    sites[12][0].splice(0, 0, 'SCAZ');
     sites[12][0].splice(13, 0, '');
 
-    sites[13][0].splice(0, 0, 'SCAZ');
+    sites[13][0].splice(0, 0, 'CFHEC');
     sites[13][0].splice(13, 0, '');
 
-    sites[14][0].splice(0, 0, 'CFHEC');
+    sites[14][0].splice(0, 0, 'APJ');
     sites[14][0].splice(13, 0, '');
-
-    sites[15][0].splice(0, 0, 'APJ');
-    sites[15][0].splice(13, 0, '');
 
     const score = ['C', 'D', 'E', 'F'];
 
@@ -239,3 +229,5 @@ async function listSitesWithIssues() {
     }  
 }
 listSitesWithIssues();
+
+
