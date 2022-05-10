@@ -37,4 +37,6 @@ async function insertRow() {
         }
     });
 }
-insertRow();
+
+
+module.exports = { insertRow };
